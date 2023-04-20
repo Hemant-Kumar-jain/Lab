@@ -1,0 +1,85 @@
+#Create a table EMP1.
+use 4119db;
+create table EMP1(Id int(2) not null primary key,Name varchar(10),Basic float(6,2),Designation varchar(10),Age int(2) not null);
+
+#check table description
+desc emp1;
+
+#Change the data type of the field Basic from float to integer with required size of the EMP1 table
+alter table Emp1 modify Basic integer not null;
+#check table description
+desc emp1;
+
+#Change the field size of Name column of the EMP1 table from 10 to 15. 
+alter table Emp1 modify Name varchar(15) not null;
+#check table description
+desc emp1;
+
+#Create another table EMP_trainee with the same (changed) structure. The column ID to be renamed as Emp_id in the EMP_trainee table.
+create table emp_trainee(Emp_id int(2) not null,Name varchar(10),Basic float(6,2),Designation varchar(10),Age int(2));
+#Insert following data in EMP1 table:-
+insert into emp1 values(1,'Rohit',6700,'Manager', 24);
+insert into emp1 values(2, 'Sunil', 6200, 'Engineer', 27);
+insert into emp1 values(3, 'Payal', 6300, 'Engineer', 25);
+insert into emp1 values(4, 'Kunal', 6700, 'Trainee', 28);
+insert into emp1 values(5, 'Sunita', 6230, 'Trainee', 26);
+insert into emp1 values(6, 'Bimal', 7000, 'Trainee', 25);
+
+#Insert all rows with the designation ‘trainee’ from the EMP1 table to EMP_trainee table
+insert into Emp_trainee select * from Emp1 where designation='trainee';
+#Display the structure of both the tables.
+select * from emp1;
+select * from emp_trainee;
+
+#Add columns Skills (data type-varchar2 and size-10) and DOJ (data type-date) to the
+#EMP1 table and add data for the Skills and DOJ columns according to your own wish.
+alter table emp1 add Skills varchar(10) after Age;
+alter table emp1 add Doj date after Skills;
+
+#Change the designation of all trainees in EMP_trainee table to ‘Programmer _Trainee’
+alter table Emp_trainee modify designation varchar(20) not null;
+update EMP_trainee set designation='Programmer_Trainee' where designation='trainee';
+
+#Update more than one row in one query in EMP1 table.
+update emp1 set age=35 where id=3;
+update emp1 set age=30 where id=2;
+update emp1 set age=25 where id=1;
+
+#Change the data type of ID in EMP1 table to varchar2 and increase the data size to 5.
+alter table emp1 modify Id varchar(5);
+
+#Display both the tables EMP1 and EMP_trainee.
+select * from emp1;
+select * from emp_trainee;
+
+#Rename the column Age of EMP1 table to Age_in_Years.
+alter table emp1 change column age Age_in_Years int;
+
+#Delete the details of all the trainees from the EMP1 table.
+delete from emp1 where designation='trainee';
+
+#Drop the Age column from the EMP_trainee table.
+alter table EMP_trainee
+drop column Age;
+
+#Drop two columns in one query from EMP_trainee table.
+alter table EMP_trainee drop column basic;
+alter table EMP_trainee drop column designation;
+
+#Rename the table EMP1 to EMP_Mgr_Engr.
+alter table Emp1 rename to EMP_Mgr_Engr;
+
+#Drop the table EMP_Trainee.
+drop table emp_trainee;
+
+#Truncate EMP_Mgr_Engr table.
+truncate EMP_Mgr_Engr;
+
+#Recover the data of EMP_Mgr_Engr. 
+
+
+
+
+
+
+
